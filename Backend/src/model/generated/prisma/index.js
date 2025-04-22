@@ -128,7 +128,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\Sengeki\\Desktop\\Restaurant-API\\Backend\\src\\model\\generated\\prisma",
+      "value": "C:\\Users\\gamer\\OneDrive\\Documents\\Restaurant-API\\Backend\\src\\model\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -142,7 +142,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\Sengeki\\Desktop\\Restaurant-API\\Backend\\src\\model\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\gamer\\OneDrive\\Documents\\Restaurant-API\\Backend\\src\\model\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -159,7 +159,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:prisma@localhost:7777/postgres?schema=public"
+        "value": "postgresql://postgres:prisma@localhost:5432/postgres?schema=public"
       }
     }
   },
