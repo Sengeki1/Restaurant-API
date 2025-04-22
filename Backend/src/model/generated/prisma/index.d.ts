@@ -896,6 +896,7 @@ export namespace Prisma {
     name: string | null
     price: number | null
     type: string | null
+    deleted: Date | null
   }
 
   export type OrderMaxAggregateOutputType = {
@@ -903,6 +904,7 @@ export namespace Prisma {
     name: string | null
     price: number | null
     type: string | null
+    deleted: Date | null
   }
 
   export type OrderCountAggregateOutputType = {
@@ -910,6 +912,7 @@ export namespace Prisma {
     name: number
     price: number
     type: number
+    deleted: number
     _all: number
   }
 
@@ -929,6 +932,7 @@ export namespace Prisma {
     name?: true
     price?: true
     type?: true
+    deleted?: true
   }
 
   export type OrderMaxAggregateInputType = {
@@ -936,6 +940,7 @@ export namespace Prisma {
     name?: true
     price?: true
     type?: true
+    deleted?: true
   }
 
   export type OrderCountAggregateInputType = {
@@ -943,6 +948,7 @@ export namespace Prisma {
     name?: true
     price?: true
     type?: true
+    deleted?: true
     _all?: true
   }
 
@@ -1037,6 +1043,7 @@ export namespace Prisma {
     name: string
     price: number
     type: string
+    deleted: Date | null
     _count: OrderCountAggregateOutputType | null
     _avg: OrderAvgAggregateOutputType | null
     _sum: OrderSumAggregateOutputType | null
@@ -1063,6 +1070,7 @@ export namespace Prisma {
     name?: boolean
     price?: boolean
     type?: boolean
+    deleted?: boolean
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1070,6 +1078,7 @@ export namespace Prisma {
     name?: boolean
     price?: boolean
     type?: boolean
+    deleted?: boolean
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1077,6 +1086,7 @@ export namespace Prisma {
     name?: boolean
     price?: boolean
     type?: boolean
+    deleted?: boolean
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectScalar = {
@@ -1084,9 +1094,10 @@ export namespace Prisma {
     name?: boolean
     price?: boolean
     type?: boolean
+    deleted?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "type", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "type" | "deleted", ExtArgs["result"]["order"]>
 
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
@@ -1096,6 +1107,7 @@ export namespace Prisma {
       name: string
       price: number
       type: string
+      deleted: Date | null
     }, ExtArgs["result"]["order"]>
     composites: {}
   }
@@ -1523,6 +1535,7 @@ export namespace Prisma {
     readonly name: FieldRef<"Order", 'String'>
     readonly price: FieldRef<"Order", 'Int'>
     readonly type: FieldRef<"Order", 'String'>
+    readonly deleted: FieldRef<"Order", 'DateTime'>
   }
     
 
@@ -1907,7 +1920,8 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     price: 'price',
-    type: 'type'
+    type: 'type',
+    deleted: 'deleted'
   };
 
   export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -1927,6 +1941,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -1963,6 +1985,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1987,6 +2023,7 @@ export namespace Prisma {
     name?: StringFilter<"Order"> | string
     price?: IntFilter<"Order"> | number
     type?: StringFilter<"Order"> | string
+    deleted?: DateTimeNullableFilter<"Order"> | Date | string | null
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -1994,6 +2031,7 @@ export namespace Prisma {
     name?: SortOrder
     price?: SortOrder
     type?: SortOrder
+    deleted?: SortOrderInput | SortOrder
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -2004,6 +2042,7 @@ export namespace Prisma {
     NOT?: OrderWhereInput | OrderWhereInput[]
     price?: IntFilter<"Order"> | number
     type?: StringFilter<"Order"> | string
+    deleted?: DateTimeNullableFilter<"Order"> | Date | string | null
   }, "id" | "name">
 
   export type OrderOrderByWithAggregationInput = {
@@ -2011,6 +2050,7 @@ export namespace Prisma {
     name?: SortOrder
     price?: SortOrder
     type?: SortOrder
+    deleted?: SortOrderInput | SortOrder
     _count?: OrderCountOrderByAggregateInput
     _avg?: OrderAvgOrderByAggregateInput
     _max?: OrderMaxOrderByAggregateInput
@@ -2026,12 +2066,14 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Order"> | string
     price?: IntWithAggregatesFilter<"Order"> | number
     type?: StringWithAggregatesFilter<"Order"> | string
+    deleted?: DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
   }
 
   export type OrderCreateInput = {
     name: string
     price: number
     type: string
+    deleted?: Date | string | null
   }
 
   export type OrderUncheckedCreateInput = {
@@ -2039,12 +2081,14 @@ export namespace Prisma {
     name: string
     price: number
     type: string
+    deleted?: Date | string | null
   }
 
   export type OrderUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
+    deleted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -2052,6 +2096,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
+    deleted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrderCreateManyInput = {
@@ -2059,12 +2104,14 @@ export namespace Prisma {
     name: string
     price: number
     type: string
+    deleted?: Date | string | null
   }
 
   export type OrderUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
+    deleted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrderUncheckedUpdateManyInput = {
@@ -2072,6 +2119,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     price?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
+    deleted?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -2100,11 +2148,28 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type OrderCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     price?: SortOrder
     type?: SortOrder
+    deleted?: SortOrder
   }
 
   export type OrderAvgOrderByAggregateInput = {
@@ -2117,6 +2182,7 @@ export namespace Prisma {
     name?: SortOrder
     price?: SortOrder
     type?: SortOrder
+    deleted?: SortOrder
   }
 
   export type OrderMinOrderByAggregateInput = {
@@ -2124,6 +2190,7 @@ export namespace Prisma {
     name?: SortOrder
     price?: SortOrder
     type?: SortOrder
+    deleted?: SortOrder
   }
 
   export type OrderSumOrderByAggregateInput = {
@@ -2165,6 +2232,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2175,6 +2256,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -2200,6 +2285,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2244,6 +2340,31 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
 

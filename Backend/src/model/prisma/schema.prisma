@@ -9,8 +9,9 @@ datasource db {
 }
 
 model Order {
-  id    Int    @id @default(autoincrement())
-  name  String @unique
-  price Int
-  type  String
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  price     Int
+  type      String
+  deleted   DateTime?  
 }
