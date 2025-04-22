@@ -1,7 +1,6 @@
-version: '3.7'
-
 services:
   postgres:
+    container_name: postgres_restaurant
     image: postgres:15
     restart: always
     environment:
@@ -9,16 +8,11 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=prisma
     ports:
-      - "5432:5432"
+      - "7777:5432"
     networks:
       - prisma-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U prisma -d postgres"]
-      interval: 5s
-      timeout: 2s
-      retries: 20
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data_restaurant:/var/lib/postgresql/data
     command: postgres -c listen_addresses='*'
     logging:
       options:
@@ -29,4 +23,4 @@ networks:
   prisma-network:
 
 volumes:
-  postgres_data:
+  postgres_data_restaurant:
