@@ -1,0 +1,11 @@
+.cards-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 90%;
+    border: 1px solid red;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
