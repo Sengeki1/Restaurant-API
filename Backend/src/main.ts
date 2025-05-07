@@ -8,7 +8,7 @@ import Yaml from 'yamljs'
 const app = express();
 const prisma = new PrismaClient();
 const swaggerDocument = Yaml.load('./swagger.yml');
-const PORT = 3000;
+const PORT = 3001;
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 dotenv.config();
