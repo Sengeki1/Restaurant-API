@@ -13,12 +13,14 @@ import {
   FormLabel
 } from '@mui/material';
 import Swal from "sweetalert2"
+import { useNavigate  } from "react-router-dom"
 
 function PaymentForm() {
 
     const { handleSubmit, register } = useForm();
+    const navigate = useNavigate();
 
-    const onSubmit = (value) => {
+    const onSubmit = () => {
         showAlert();
     };
 
@@ -29,7 +31,7 @@ function PaymentForm() {
             draggable: false
         }).then((result) => {
             if (result.isConfirmed) {
-               // go back to main menu
+                navigate('/');
             }
         })
     }

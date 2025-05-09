@@ -7,12 +7,14 @@
 .header {
     right: 0;
     padding: 30px;
+    width: 110%;
+    height: auto;
     box-shadow: 0px 2px 4px #242424;
 }
 
 h3 {
     position: absolute;
-    right: 5%;
+    right: 9%;
     top: 20px;
     font-size: 20px;
     color: gray;
@@ -21,8 +23,19 @@ h3 {
 
 .icon {
     position: absolute;
+    color: black;
     top: 15px;
     font-size: 30px;
+    cursor: pointer;
+}
+
+.iconAccount {
+    position: absolute;
+    border: 1px solid red;
+    right: 3%;
+    top: 12px;
+    font-size: 25px;
+    color: black;
     cursor: pointer;
 }
 

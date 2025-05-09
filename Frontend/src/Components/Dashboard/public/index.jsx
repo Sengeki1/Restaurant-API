@@ -8,6 +8,7 @@ import {
     FormControl
 } from "@mui/material";
 import NavBar from "../../UI/Header/NavBar"
+import { Link } from "react-router-dom";
 
 const DashboardUserPage = () => {
   return (
@@ -54,12 +55,17 @@ const DashboardUserPage = () => {
 
             </Select>
             <br/>
-            <Button
-              variant="contained"
-              size="large"
-            >
-              Pay
-            </Button>
+            <Link to={"/payment"}>
+              <Button
+                variant="contained"
+                size="large"
+                sx={{
+                  width: 300
+                }}
+              >
+                Pay
+              </Button>
+            </Link>
           </FormControl>
         </Card>
       </Box>

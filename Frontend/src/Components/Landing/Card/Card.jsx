@@ -9,7 +9,7 @@ import {
 export default function Card(props) {
     let id = props.id;
   return (
-    (id < 8 ?
+    (id < 4 ?
     <Paper
       sx={{
         p: 1,

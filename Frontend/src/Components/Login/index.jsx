@@ -9,10 +9,9 @@ import {
     Checkbox,
     Button,
     Grid,
-    Link,
   } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { Link as RouterLink } from "react-router-dom";
+import { Link } from "react-router-dom";
   
 const LoginPage = () => {
     const handleSubmit = () => console.log("login");
@@ -56,9 +55,9 @@ const LoginPage = () => {
                 </Box>
                 <Grid container justifyContent="space-between" sx={{ mt: 1 }}>
                 <Grid item sx={{ marginTop: 2, marginBottom: 2, cursor: "pointer" }}>
-                    {/* <Link component={RouterLink} to="/register"> */}
-                    Sign Up
-                    {/* </Link> */}
+                    <Link to="/register">
+                        Sign Up
+                    </Link>
                 </Grid>
                 </Grid>
             </Paper>
