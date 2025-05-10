@@ -37,8 +37,6 @@ const DashboardUserPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(selectedAmmount);
-    console.log(selectedFood);
     if (selectedAmmount !== "" && selectedFood !== "") {
       navigate("/payment");
     }
