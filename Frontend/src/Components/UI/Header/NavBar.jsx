@@ -3,30 +3,61 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from 'react-router-dom';
 import './Header.css'
 import { Menu, MenuItem, IconButton  } from '@mui/material';
-import { useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { logOut, isAuthenticated } from '../../PrivateRoute';
 
 export default function NavBar () {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
+    const [menuItem, setMenuItem] = useState();
+    const [children, setChildren] = useState(Fragment);
   
     const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+        setAnchorEl(event.currentTarget);
     };
     
     const handleClose = () => {
-      setAnchorEl(null);
+        localStorage.removeItem('token');
+        setAnchorEl(null);
     };
+
+    const handleCloseMenu = () => {
+        setAnchorEl(null);
+    };
+
+    const handleDashboard = () => {
+        const auth = isAuthenticated();
+
+        if (auth.role === "user") {
+            setChildren(
+                <Link to={"/dashboard"}>
+                    <h3>
+                        Dashboard
+                    </h3>
+                </Link>
+            );
+        } else {
+            setChildren(
+                <Link to={"/dashboard-admin"}>
+                    <h3>
+                        Dashboard
+                    </h3>
+                </Link>
+            );
+        }
+    }
+
+    useEffect(() => {
+        handleDashboard();
+        setMenuItem(logOut());
+    }, []);
     
     return (
         <div className='header'>
             <Link to={"/"}>
                 <HomeIcon className='icon'/>
             </Link>
-            <Link to={"/dashboard"}>
-                <h3>
-                    Dashboard
-                </h3>
-            </Link>
+            {children}
             <IconButton onClick={handleClick} sx={{
                 position: "absolute",
                 right: "3%",
@@ -40,12 +71,10 @@ export default function NavBar () {
             <Menu
                 anchorEl={anchorEl}
                 open={open}
-                onClose={handleClose}
+                onClose={handleCloseMenu}
             >
                     <MenuItem onClick={handleClose}>
-                        <Link to={"/login"} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            Sign in
-                        </Link>
+                        {menuItem}
                     </MenuItem>
             </Menu>
         </div>

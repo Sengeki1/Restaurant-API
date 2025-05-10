@@ -15,8 +15,8 @@ function DashboardAdminPage () {
     useEffect(() => {
         const savedUsers = localStorage.getItem('users');
         if (savedUsers) {
-        setUsers(JSON.parse(savedUsers));
-        console.log(users);
+            setUsers(JSON.parse(savedUsers));
+            console.log(users);
         }
     }, []);
 

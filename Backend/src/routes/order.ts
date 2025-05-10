@@ -35,14 +35,13 @@ export const orders = async (req, res) => {
               deleted: null,
             },
           });
-          return res.status(200).send("Order(s) created successfully!");
+        } else {
+          await prisma.order.create({
+            data: obj,
+          });
         }
-
-        await prisma.order.create({
-          data: obj,
-        });
-        return res.status(200).send("Order(s) created successfully!");
       });
+      return res.status(200).send("Order(s) created successfully!");
     });
   } catch (error) {
     throw console.log(error);

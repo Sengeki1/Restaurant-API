@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { 
     Card,
     Box,
@@ -11,6 +11,11 @@ import NavBar from "../../UI/Header/NavBar"
 import { Link } from "react-router-dom";
 
 const DashboardUserPage = () => {
+
+  useEffect(() => {
+
+  }, []);
+
   return (
     <>
       <NavBar/>

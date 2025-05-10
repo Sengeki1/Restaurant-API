@@ -10,25 +10,48 @@ export const createUser = async (req, res) => {
     try {
         const user = req.body;
         const hashedPassword = await bcrypt.hash(user.password, 10);
-        await prisma.$transaction(async () => {
-            await prisma.user.create({
-                data: {
-                    id: user.id,
-                    email: user.email,
-                    password: hashedPassword,
-                    username: user.username,
-                    deleted: null
-                }
-            });    
-        });
 
-        const token = jwt.sign(
-            { email: user.email, id: user.id }, 
-            process.env.JWT_SECRET,           
-            { expiresIn: '24h' }               
-        );
+        if (user.email === "admin@123.com") {
+            await prisma.$transaction(async () => {
+                await prisma.user.create({
+                    data: {
+                        email: user.email,
+                        password: hashedPassword,
+                        username: user.username,
+                        role: 'admin',
+                        deleted: null
+                    }
+                });    
+            });
 
-        res.status(201).json({ token });
+            const token = jwt.sign(
+                { email: user.email, id: user.id, role: 'admin' }, 
+                process.env.JWT_SECRET,           
+                { expiresIn: '24h' }               
+            );
+
+            res.status(201).json({ token });
+        } else {
+            await prisma.$transaction(async () => {
+                await prisma.user.create({
+                    data: {
+                        email: user.email,
+                        password: hashedPassword,
+                        username: user.username,
+                        role: 'user',
+                        deleted: null
+                    }
+                });    
+            });
+
+            const token = jwt.sign(
+                { email: user.email, id: user.id, role: 'user' }, 
+                process.env.JWT_SECRET,           
+                { expiresIn: '24h' }               
+            );
+
+            res.status(201).json({ token });
+        }
     } catch (error) {
         res.status(400).json({
             error: error.message
@@ -53,9 +76,9 @@ export const validateUser = async (req, res) => {
                 if (!passwordMatch) {
                     return res.status(401).json({ error: "Invalid password" });
                 }
-
+                
                 const token = jwt.sign(
-                    { email: user.email, id: user.id },
+                    { email: user.email, id: user.id, role: user_found.role },
                     process.env.JWT_SECRET,            
                     { expiresIn: '24h' }                
                 );
