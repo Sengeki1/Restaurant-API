@@ -15,7 +15,7 @@
 
 h3 {
     position: absolute;
-    right: 90px;
+    right: 80px;
     top: 20px;
     font-size: 20px;
     color: gray;
@@ -32,8 +32,7 @@ h3 {
 
 .iconAccount {
     position: absolute;
-    border: 1px solid red;
-    right: 3%;
+    right: 5%;
     top: 12px;
     font-size: 25px;
     color: black;

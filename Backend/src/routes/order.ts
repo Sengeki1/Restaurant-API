@@ -98,13 +98,15 @@ export const patchOrder = async (req, res) => {
         }
       });
 
+      const { id, ...updateData } = data[0];
+      
       if (existingOrder) {
         await prisma.order.update({
           where: {
             id: existingOrder?.id
           },
           data: {
-            ...data[0],
+            ...updateData,
             deleted: null,
           },
         });

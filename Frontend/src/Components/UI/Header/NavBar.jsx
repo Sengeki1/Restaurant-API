@@ -60,7 +60,7 @@ export default function NavBar () {
             {children}
             <IconButton onClick={handleClick} sx={{
                 position: "absolute",
-                right: "3%",
+                right: "30px",
                 top: "12px",
                 fontSize: "25px",
                 color: "black",

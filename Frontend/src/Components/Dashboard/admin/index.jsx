@@ -1,56 +1,88 @@
 import { useState, useEffect } from 'react';
-import { TextField, Box, Grid } from '@mui/material'
-import { ButtonComponent } from './UI-Extended/Button';
+import { 
+    TextField, 
+    Box, 
+    Grid,
+    FormControl,
+    Typography, 
+    Button
+} from '@mui/material'
 import { CardComponent } from './UI-Extended/Card';
 import NavBar from '../../UI/Header/NavBar';
 
 function DashboardAdminPage () {
 
-    const [user, setUser] = useState({id: 1, name: "User"});
-    const [users, setUsers] = useState([]);
+    const [dish, setDish] = useState({id: Math.random(), name: "", price: null, type: "cape-verdian dish"});
+    const [dishes, setDishes] = useState([]);
     const [edit, setEdit] = useState(false);
-    const [inputValue, setInputValue] = useState('');
-    const [currentEditUser, setCurrentEditUser] = useState({id: 1, name: "User"});
+    const [currentEditDish, setCurrentEditDish] = useState({id: Math.random(), name: "", price: null, type: "cape-verdian dish"});
 
-    useEffect(() => {
-        const savedUsers = localStorage.getItem('users');
-        if (savedUsers) {
-            setUsers(JSON.parse(savedUsers));
-            console.log(users);
+    const getDishes = async () => {
+        if (dishes.length <= 0) {
+            const response = await fetch("http://localhost:3001/menu");
+            setDishes(await response.json());   
         }
-    }, []);
+    }
 
     useEffect(() => {
-        if (users.length > 0) localStorage.setItem('users', JSON.stringify(users));
-        const savedUsers = localStorage.getItem('users');
-        console.log(savedUsers);
-    }, [users]);
+        getDishes();
+    });
 
-    const handleAddUser = () => {
+    const handleAddDish = async () => {
+        const token = localStorage.getItem("token");
+        const postDish = async () => {
+            await fetch("http://localhost:3001/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(dish)
+            });
+        }
+
         if (!edit) {
-            setUsers(prev => [...prev, user]);
+            setDishes(prev => [...prev, dish]);
+            await postDish ();
         } else {
-            setUsers(prev => 
-                prev.map(prev_user => prev_user.id === currentEditUser.id ? user : prev_user)
+            setDishes(prev => 
+                prev.map(prev_dish => prev_dish.id === currentEditDish.id ? dish : prev_dish)
             );
+
+            await fetch(`http://localhost:3001/orders/${currentEditDish.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(dish)
+            });
+
             setEdit(false);
         }
     }
 
-    const handleUser = (type, _user) => {
+    const handleDish = (type, _dish) => {
+        const token = localStorage.getItem("token");
+        const deleteDish = async () => {
+            await fetch(`http://localhost:3001/orders/${_dish.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(dish)
+            });
+        }
         if (type === "Remove") {
-            setUsers(users.filter(user => user.id !== _user.id));
+            setDishes(dishes.filter(dish => dish.id !== _dish.id));
+            deleteDish();
         }
         if (type === "Edit") {
-            setCurrentEditUser(_user);
-            setInputValue(_user.name)
+            setCurrentEditDish(_dish);
             setEdit(true);
         }
     }
-
-    const resetInput = () => {
-        setInputValue('');
-    };
 
     return (
         <div>
@@ -61,40 +93,72 @@ function DashboardAdminPage () {
                         position: "relative",
                         width: "90%",
                         display: "flex",
-                        flexDirection: "row",
-                        textAlign: "center",
+                        flexGrow: 1,
+                        flexWrap: "wrap",
                         justifyContent: "center",
                         alignItems: "center",
                         textAlign: "center",
                         minHeight: "90vh",
                     }}
                 >
-                    <TextField 
-                        sx={{
-                            width: "30%", 
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            handleAddDish();
                         }}
-                        id="outlined-basic" 
-                        label="User" 
-                        variant="outlined" 
-                        value={inputValue}
-                        onChange={(event) => {
-                            const value = event.target.value;
-                            setInputValue(value);
-                            setUser(
-                                { id: Math.random(), name: value }
-                            );
-                        }}
-                    />
-                    <ButtonComponent type="Add" handleUser={handleAddUser} resetInput={resetInput}/> 
+                    >
+                        <FormControl fullWidth sx={{ m: 1 }}>
+                        <Typography fontSize={20} fontWeight="bold" mb={2}>
+                            Add Dish
+                        </Typography>
+
+                        <TextField
+                            variant="outlined"
+                            label="Dish name"
+                            fullWidth
+                            sx={{ 
+                                mb: 2,
+                                width: 250
+                            }}
+                            value={dish.name}
+                            onChange={(e) =>
+                                setDish((prev) => ({ ...prev, name: e.target.value }))
+                            }
+                        />
+
+                        <TextField
+                            type="number"
+                            label="Dish price"
+                            fullWidth
+                            sx={{ 
+                                mb: 2,
+                                width: 250,
+                            }}
+                            value={dish.price}
+                            onChange={(e) =>
+                                setDish((prev) => ({ ...prev, price: parseFloat(e.target.value) }))
+                            }
+                        />
+
+                        <Button 
+                            variant="contained" 
+                            type="submit" 
+                            size="large" 
+                            fullWidth
+                        >
+                            {edit ? "Update Dish" : "Add Dish"}
+                        </Button>
+                        </FormControl>
+                    </form>
                     <Box sx={{
                         border: "1px solid black",
                         borderRadius: "15px",
-                        width: "90%",
+                        width: "70%",
                         height: "600px",
                         overflowY: "scroll",
                         marginLeft: "35px"
                     }}>
-                        <CardComponent handleUser={handleUser} users={users}/>
+                        <CardComponent handleDish={handleDish} dishes={dishes}/>
                     </Box>
                 </Grid>
             </div>

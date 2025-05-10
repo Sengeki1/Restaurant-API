@@ -1,15 +1,15 @@
 import { Button } from '@mui/material'
 
-export function ButtonComponent({type, handleUser, resetInput, user}) {
+export function ButtonComponent({type, handleDish, dish}) {
     return (
         type !== "Add" ? (
             <Button 
                 variant="outlined" 
                 sx={{
                     width: "100%",
-                    height: "56px"
+                    height: "80px"
                 }}
-                onClick={() => {handleUser(type, user)}}
+                onClick={() => {handleDish(type, dish)}}
             >
                 {type}
             </Button>
@@ -20,7 +20,7 @@ export function ButtonComponent({type, handleUser, resetInput, user}) {
                     width: "11.3%",
                     height: "56px"
                 }}
-                onClick={() => {handleUser(type, user); resetInput();}}
+                onClick={() => {handleDish(type, dish)}}
             >
                 {type}
             </Button>

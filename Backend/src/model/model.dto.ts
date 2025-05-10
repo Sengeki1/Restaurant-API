@@ -1,12 +1,13 @@
 export interface Order {
-    name: string,
-    price: number,
-    type: string,
+    id?:        number,
+    name:       string,
+    price:      number,
+    type:       string
 }
 
 export interface User {
-    email: string,
-    username: string,
-    password: string,
-    role: string
+    email:      string,
+    username:   string,
+    password:   string,
+    role:       string
 }

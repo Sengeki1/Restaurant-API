@@ -1,9 +1,9 @@
 import { ButtonComponent } from './Button';
 import { Box, Card, CardMedia, Typography } from '@mui/material'
 
-export function CardComponent({handleUser, users}) {
+export function CardComponent({handleDish, dishes}) {
     return (
-        users.map(user => {
+        dishes.map(dish => {
             return (
                 <div>
                     <Box
@@ -42,7 +42,14 @@ export function CardComponent({handleUser, users}) {
 
                                 }}
                             >
-                                {user.name}
+                                {dish.name}
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    
+                                }}
+                            >
+                                {dish.price}
                             </Typography>
                         </Card>
                         <Card 
@@ -55,8 +62,8 @@ export function CardComponent({handleUser, users}) {
                                 textAlign: "center",
                             }} 
                             >
-                            <ButtonComponent type="Edit" handleUser={handleUser} user={user}/>
-                            <ButtonComponent type="Remove" handleUser={handleUser} user={user}/>
+                            <ButtonComponent type="Edit" handleDish={handleDish} dish={dish}/>
+                            <ButtonComponent type="Remove" handleDish={handleDish} dish={dish}/>
                         </Card>
                     </Box>
                 </div>
