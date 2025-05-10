@@ -22,3 +22,16 @@ export async function middleware(data: [Order]): Promise<Order[]> {
         throw console.log(error);
     }
 }
+
+export async function authenticate(req, res, next): Promise<void> {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
+            return res.status(401).json({ message: "Missing or invalid token" });
+        } 
+        next();
+    } catch (error) {
+        console.error("Authentication error:", error);
+        res.status(401).json({ message: "Unauthorized" });
+    }
+}

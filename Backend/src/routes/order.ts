@@ -1,5 +1,5 @@
 import { PrismaClient } from "../model/generated/prisma";
-import { middleware } from "../controllers/controller";
+import { middleware, authenticate } from "../controllers/controller";
 
 const prisma = new PrismaClient();
 
