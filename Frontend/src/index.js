@@ -21,7 +21,7 @@ const router = createBrowserRouter([
   {path: "/dashboard-admin", element: <PrivateRouteAdmin><DashboardAdminPage/></PrivateRouteAdmin>},
   {path: "/login", element: <LoginPage/>},
   {path: "/register", element: <RegisterPage/>},
-  {path: "/payment", element: <PrivateRouteAdmin><PaymentForm/></PrivateRouteAdmin>},
+  {path: "/payment", element: <PrivateRoute><PaymentForm/></PrivateRoute>},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
